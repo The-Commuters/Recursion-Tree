@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.layout.HBox?>
+<?import tree.Tree?>
 <BorderPane fx:controller="main.Controller"
             xmlns:fx="http://javafx.com/fxml">
     <top>
@@ -16,8 +17,6 @@
     </top>
 
     <center>
-        <Pane>
-            <fx:include source="tree.fxml"/>
-        </Pane>
+        <fx:include source="../tree/tree.fxml" />
     </center>
 </BorderPane>
