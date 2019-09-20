@@ -10,7 +10,4 @@
         xmlns:fx="http://javafx.com/fxml"
         fx:controller="tree.Tree"
         fx:id="treePane"
-        onMousePressed="#renderTree">
-
-
-</Pane>
+        onMousePressed="#renderTree" />
