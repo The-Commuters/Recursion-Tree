@@ -17,18 +17,19 @@ public class Tree {
     }
 
     // TODO get variables from input
-    private void tree(int n, double x, double y, double a, double branchLength) {
-        // Fields
+    private void tree(int teller, double x, double y, double branchAngle, double branchLength) {
+
+// Fields
         final double branchShrinkRatio = 1;
         final double branchAngle = Math.toRadians(15);
-        final double cx = x + (Math.cos(a) * branchLength);
-        final double cy = y + (Math.sin(a) * branchLength);
+        final double cx = x + (Math.cos(branchAngle) * branchLength);
+        final double cy = y + (Math.sin(branchAngle) * branchLength);
 
         // Draw Branch
         treePane.getChildren().add(new Line(x, y, cx, cy));
 
         // Checks
-        if (n == 0) {
+        if (teller == 0) {
             return;
         }
         if (branchLength < 2) {
@@ -40,8 +41,8 @@ public class Tree {
         }
 
         // Recursion
-        tree(n - 1, cx, cy, a - branchAngle, branchLength * branchShrinkRatio);
-        tree(n - 1, cx, cy, a + branchAngle, branchLength * branchShrinkRatio);
+        tree(teller - 1, cx, cy, branchAngle - branchAngle, branchLength * branchShrinkRatio);
+        tree(teller - 1, cx, cy, branchAngle + branchAngle, branchLength * branchShrinkRatio);
     }
 
     private void deleteTree() {
