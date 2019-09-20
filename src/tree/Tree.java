@@ -16,7 +16,7 @@ public class Tree {
         deleteTree();
 
         // TODO get variables from input
-        tree(inputN, treePane.getWidth() / 2, treePane.getHeight() / 2, -45, 10);
+        tree(inputN, treePane.getWidth() / 2, treePane.getHeight(), -45, 10);
     }
 
     // TODO get variables from input
@@ -24,9 +24,14 @@ public class Tree {
         // Fields
         final double branchShrinkRatio = 1;
         final double branchAngle = Math.toRadians(15);
-        final double cx = x + (Math.cos(a) * branchLength);
-        final double cy = y + (Math.sin(a) * branchLength);
+        double cx = x + (Math.cos(a) * branchLength);
+        double cy = y + (Math.sin(a) * branchLength);
         double branchWitherRatio = calculateWitherRatio(n);
+        /*
+        if (inputN == n){
+            cx =
+        }
+         */
 
         // Draw Branch
         treePane.getChildren().add(new Line(x, y, cx, cy));
