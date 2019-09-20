@@ -8,7 +8,7 @@ public class Tree {
     @FXML
     private Pane treePane;
 
-    int inputN = 10;
+    int inputN = 15;
     double inputWitherRatio = 0.5;
 
     @FXML
@@ -16,7 +16,7 @@ public class Tree {
         deleteTree();
 
         // TODO get variables from input
-        tree(inputN, treePane.getWidth() / 2, treePane.getHeight() / 2, -45, 10);
+        tree(inputN, treePane.getWidth() / 2, treePane.getHeight(), -45, 50);
     }
 
     // TODO get variables from input
@@ -24,9 +24,17 @@ public class Tree {
         // Fields
         final double branchShrinkRatio = 1;
         final double branchAngle = Math.toRadians(15);
-        final double cx = x + (Math.cos(a) * branchLength);
-        final double cy = y + (Math.sin(a) * branchLength);
+        double cx = x + (Math.cos(a) * branchLength);
+        double cy = y + (Math.sin(a) * branchLength);
         double branchWitherRatio = calculateWitherRatio(n);
+
+        //if this is on creation, ashure the propper start location of the tree
+        if (inputN == n){
+            cx = x;
+            cy = y - branchLength;
+            a = -45.55; //no idea why this number becomes a straight tree, its arived at buy trail and error
+        }
+
 
         // Draw Branch
         treePane.getChildren().add(new Line(x, y, cx, cy));
