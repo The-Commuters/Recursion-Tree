@@ -27,11 +27,13 @@ public class Tree {
         double cx = x + (Math.cos(a) * branchLength);
         double cy = y + (Math.sin(a) * branchLength);
         double branchWitherRatio = calculateWitherRatio(n);
-        /*
+
+        //sett cx og cy til verdier som retter opp treet
         if (inputN == n){
-            cx =
+            cx = x;
+            cy = y - branchLength;
         }
-         */
+
 
         // Draw Branch
         treePane.getChildren().add(new Line(x, y, cx, cy));
