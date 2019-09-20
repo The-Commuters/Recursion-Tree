@@ -26,7 +26,7 @@ public class Tree {
         final double branchAngle = Math.toRadians(15);
         final double cx = x + (Math.cos(a) * branchLength);
         final double cy = y + (Math.sin(a) * branchLength);
-        double branchWitherRatio = calculateWitherRatio(n);
+        final double branchWitherRatio = calculateWitherRatio(n);
 
         // Draw Branch
         treePane.getChildren().add(new Line(x, y, cx, cy));
