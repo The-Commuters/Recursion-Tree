@@ -8,12 +8,15 @@ public class Tree {
     @FXML
     private Pane treePane;
 
+    int inputN = 10;
+    double inputWitherRatio = 0.5;
+
     @FXML
     private void renderTree() {
         deleteTree();
 
         // TODO get variables from input
-        tree(10, treePane.getWidth() / 2, treePane.getHeight() / 2, -45, 10);
+        tree(inputN, treePane.getWidth() / 2, treePane.getHeight() / 2, -45, 10);
     }
 
     // TODO get variables from input
@@ -23,6 +26,7 @@ public class Tree {
         final double branchAngle = Math.toRadians(15);
         final double cx = x + (Math.cos(a) * branchLength);
         final double cy = y + (Math.sin(a) * branchLength);
+        double branchWitherRatio = calculateWitherRatio(n);
 
         // Draw Branch
         treePane.getChildren().add(new Line(x, y, cx, cy));
@@ -34,14 +38,19 @@ public class Tree {
         if (branchLength < 2) {
             return;
         }
-        if (Math.random() == 0) {
-            System.out.println("How Random");
-            // return;
-        }
 
+        System.out.println("sucsess chance: " + branchWitherRatio + " at stepp " + n);
         // Recursion
-        tree(n - 1, cx, cy, a - branchAngle, branchLength * branchShrinkRatio);
-        tree(n - 1, cx, cy, a + branchAngle, branchLength * branchShrinkRatio);
+        if (Math.random() < branchWitherRatio) {
+            tree(n - 1, cx, cy, a - branchAngle, branchLength * branchShrinkRatio);
+        }
+        if (Math.random() < branchWitherRatio) {
+            tree(n - 1, cx, cy, a + branchAngle, branchLength * branchShrinkRatio);
+        }
+    }
+
+    private double calculateWitherRatio(int n){
+        return Math.pow(((double)n / (double)inputN), inputWitherRatio);
     }
 
     private void deleteTree() {
