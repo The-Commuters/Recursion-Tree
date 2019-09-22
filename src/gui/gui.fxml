@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="gui.GuiController">
+    <top>
+        <BorderPane>
+            <top>
+                <HBox>
+                    <Spinner fx:id="branchLimitSpinner" />
+                    <Button text="Wither Ratio" onMousePressed="#renderBranchWitherSlider"/>
+                    <Button text="Branch Length" onMousePressed="#renderBranchLengthSlider"/>
+                    <Button text="Growth Ratio" onMousePressed="#renderBranchGrowthRatioSlider"/>
+                    <Button text="Branch Angle" onMousePressed="#renderBranchAngleSlider"/>
+                    <Button text="Trunk Angle" onMousePressed="#renderTrunkAngleSlider"/>
+                    <Button text="New Tree" onMousePressed="#renderTree"/>
+                </HBox>
+            </top>
+
+            <center>
+                <Pane fx:id="sliderPane"/>
+            </center>
+        </BorderPane>
+    </top>
+
+    <center>
+        <Pane fx:id="treePane" />
+    </center>
+</BorderPane>
