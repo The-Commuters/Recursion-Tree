@@ -31,6 +31,17 @@ public class GuiController {
     @FXML
     private void initialize() {
         initializeBranchLimitSpinner();
+        initializeTreePane();
+    }
+
+    /**
+     * Sets upp a clip for treePane
+     */
+    private void initializeTreePane() {
+        Rectangle clipRect = new Rectangle(treePane.getWidth(), treePane.getHeight());
+        clipRect.heightProperty().bind(treePane.heightProperty());
+        clipRect.widthProperty().bind(treePane.widthProperty());
+        treePane.setClip(clipRect);
     }
 
     /**
