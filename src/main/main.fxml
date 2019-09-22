@@ -7,16 +7,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.layout.HBox?>
-<?import tree.Tree?>
+<?import components.SharedController?>
 <BorderPane fx:controller="main.Controller"
             xmlns:fx="http://javafx.com/fxml">
     <top>
-        <HBox>
-            <Text text="Options" />
-        </HBox>
+        <fx:include source="../components/options/options.fxml" />
     </top>
 
     <center>
-        <fx:include source="../tree/tree.fxml" />
+        <fx:include source="../components/tree/tree.fxml" />
     </center>
 </BorderPane>
