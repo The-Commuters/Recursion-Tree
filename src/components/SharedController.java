@@ -1,5 +1,6 @@
 package components;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseDragEvent;
@@ -9,16 +10,16 @@ import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.function.Function;
 
 public class SharedController {
-    @FXML
-    private Pane treePane;
-
-    @FXML
-    private Pane sliderPane;
+    @FXML private Pane treePane;
+    @FXML private Pane sliderPane;
 
     private ArrayList<Line> tree;
     private Slider slider;
+
+    private SharedModel model = new SharedModel();
 
     // TODO get variables from input
     private int inputN = 10; // 0 - 10
@@ -33,18 +34,20 @@ public class SharedController {
         unmountTree();
         buildTree(inputN, treePane.getWidth() / 2, treePane.getHeight(), inputTrunkAngle, inputBranchLength);
         mountTree();
-
         System.out.println(inputBranchWitherRatio);
     }
 
     @FXML
     private void renderBranchWitherSlider() {
-        unmountSlider();
-        buildSlider(0, 1, inputBranchWitherRatio);
-        slider.addEventHandler(MouseEvent.MOUSE_RELEASED, (e) -> {
+        renderSlider(0, 1, inputBranchWitherRatio, (e) -> {
             inputBranchWitherRatio = slider.getValue();
         });
-        System.out.println(inputBranchWitherRatio);
+    }
+
+    private void renderSlider(double min, double max, double value, EventHandler eventHandler) {
+        unmountSlider();
+        buildSlider(min, max, value);
+        slider.addEventHandler(MouseEvent.MOUSE_RELEASED, eventHandler);
         mountSlider();
     }
 
