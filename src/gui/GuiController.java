@@ -8,6 +8,7 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class GuiController {
     private ArrayList<Line> tree;
     private Slider slider;
 
-    // TODO get variables from input
+
     private int inputN = 10; // 0 - 20
     private double inputBranchWitherRatio = 0.9; // 0 - 1
     private double inputBranchLength = 30; // 1 - 100
@@ -32,6 +33,9 @@ public class GuiController {
         initializeBranchLimitSpinner();
     }
 
+    /**
+     * Sets upp and initializes the spinner input for branchLimit
+     */
     private void initializeBranchLimitSpinner() {
         SpinnerValueFactory<Integer> valueFactory;
         valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, inputN){
@@ -56,6 +60,9 @@ public class GuiController {
         branchLimitSpinner.setValueFactory(valueFactory);
     }
 
+    /**
+     * The method used to clear and build a tree
+     */
     @FXML
     private void renderTree() {
         unmountTree();
@@ -63,6 +70,9 @@ public class GuiController {
         mountTree();
     }
 
+    /**
+     * Renders the slider that controls the inputBranchWitherRatio field
+     */
     @FXML
     private void renderBranchWitherSlider() {
         renderSlider(0, 1, inputBranchWitherRatio, (e) -> {
@@ -71,6 +81,9 @@ public class GuiController {
         });
     }
 
+    /**
+     * Renders the slider that controls the inputBranchLength field
+     */
     @FXML
     private void renderBranchLengthSlider() {
         renderSlider(1, 100, inputBranchLength, (e) -> {
@@ -79,6 +92,9 @@ public class GuiController {
         });
     }
 
+    /**
+     * Renders the slider that controls the inputBranchGrowthRatio field
+     */
     @FXML
     private void renderBranchGrowthRatioSlider() {
         renderSlider(0.5, 1, inputBranchGrowthRatio, (e) -> {
@@ -87,6 +103,9 @@ public class GuiController {
         });
     }
 
+    /**
+     * Renders the slider that controls the inputBranchAngle field
+     */
     @FXML
     private void renderBranchAngleSlider() {
         renderSlider(1, 30, inputBranchAngle, (e) -> {
@@ -95,6 +114,9 @@ public class GuiController {
         });
     }
 
+    /**
+     * Renders the slider that controls the inputTrunkAngle field
+     */
     @FXML
     private void renderTrunkAngleSlider() {
         renderSlider(-180, 0, inputTrunkAngle, (e) -> {
@@ -103,6 +125,13 @@ public class GuiController {
         });
     }
 
+    /**
+     * A generic method for rendering sliders with an event on mouse release
+     * @param min the minimum value of the slider
+     * @param max the maximum value of the slider
+     * @param value the default value of the slider
+     * @param eventHandler callback
+     */
     private void renderSlider(double min, double max, double value, EventHandler eventHandler) {
         unmountSlider();
         buildSlider(min, max, value);
@@ -110,17 +139,28 @@ public class GuiController {
         mountSlider();
     }
 
+    /**
+     * Unmounts tree from treePane
+     */
     private void unmountTree() {
         if (tree != null) {
             treePane.getChildren().clear();
         }
     }
 
+    /**
+     * initializes the tree array and populates it
+     * @param n recursion limit
+     * @param a initial angle
+     */
     private void buildTree(int n, double x, double y, double a, double branchLength) {
         tree = new ArrayList<>();
         populateTree(n, x, y, a, branchLength);
     }
 
+    /**
+     * Populates the tree
+     */
     private void populateTree(int n, double x, double y, double a, double branchLength) {
         // Fields
         final double cx = x + (Math.cos(a) * branchLength);
@@ -147,27 +187,45 @@ public class GuiController {
         }
     }
 
+    /**
+     * Generic method for "curving" the branch wither ratio
+     * @param n recursion limit
+     * @return a curved ratio
+     */
     private double curveBranchWitherRatio(int n){
         return Math.pow(((double)n / (double)inputN), inputBranchWitherRatio);
     }
 
+    /**
+     * Mounts tree onto treePane
+     */
     private void mountTree() {
         if (tree != null) {
             treePane.getChildren().addAll(tree);
         }
     }
 
+    /**
+     * Unmounts slider from sliderPane
+     */
     private void unmountSlider() {
         if (slider != null) {
             sliderPane.getChildren().remove(slider);
         }
     }
 
+    /**
+     * Builds a slider
+     * @param value initial value
+     */
     private void buildSlider(double min, double max, double value) {
         slider = new Slider(min, max, value);
 
     }
 
+    /**
+     * Mounts slider onto sliderPane
+     */
     private void mountSlider() {
         if (slider != null) {
             sliderPane.getChildren().add(slider);
