@@ -19,8 +19,6 @@ public class SharedController {
     private ArrayList<Line> tree;
     private Slider slider;
 
-    private SharedModel model = new SharedModel();
-
     // TODO get variables from input
     private int inputN = 10; // 0 - 10
     private double inputBranchWitherRatio = 0.9; // 0 - 1
